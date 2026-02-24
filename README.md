@@ -16,4 +16,4 @@ python src/main.py
 ```
 
 ## License
-GNU AGPL v3 - See LICENSE file
+MIT License - See [LICENSE](LICENSE)
