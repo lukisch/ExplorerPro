@@ -16,4 +16,6 @@ python src/main.py
 ```
 
 ## License
-MIT License - See [LICENSE](LICENSE)
+AGPL v3 - See [LICENSE](LICENSE)
+
+This project uses PyQt6 (GPL) and PyMuPDF (AGPL).
