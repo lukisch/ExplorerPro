@@ -8,8 +8,7 @@ Phase 5: Vollständige Integration
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QStackedWidget,
     QTreeWidget, QTreeWidgetItem, QListWidget, QListWidgetItem,
-    QLineEdit, QPushButton, QLabel, QScrollArea, QFrame,
-    QToolButton, QButtonGroup, QSizePolicy
+    QPushButton, QLabel, QFrame, QToolButton, QButtonGroup
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QDir, QStandardPaths, QFileInfo
 from PyQt6.QtWidgets import QFileIconProvider

@@ -5,18 +5,16 @@ FileBrowser - Dateilisten-Ansicht mit QuickEditor-Integration
 """
 
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QTableView, 
-    QHeaderView, QMenu, QStyledItemDelegate, QStyle,
-    QAbstractItemView, QLabel, QMessageBox
+    QWidget, QVBoxLayout, QTableView, QHeaderView, 
+    QMenu, QAbstractItemView, QMessageBox
 )
 from PyQt6.QtCore import (
-    Qt, pyqtSignal, QDir, QFileInfo, QModelIndex,
-    QSortFilterProxyModel, QStandardPaths
+    Qt, pyqtSignal, QDir, QModelIndex, QSortFilterProxyModel,
+    QStandardPaths
 )
 from PyQt6.QtGui import (
     QFileSystemModel, QAction, QCursor
 )
-from PyQt6.QtWidgets import QFileIconProvider
 import os
 from pathlib import Path
 

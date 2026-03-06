@@ -8,16 +8,13 @@ Basiert auf ProFiler V14
 import os
 import sqlite3
 import hashlib
-import json
 from datetime import datetime
-from pathlib import Path
-from typing import List, Dict, Optional, Tuple, Generator
+from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
-from PyQt6.QtCore import QThread, pyqtSignal, QObject
+from PyQt6.QtCore import QThread, pyqtSignal
 
 # Optionale Imports
 try:
-    import PyPDF2
     from PyPDF2 import PdfReader
     HAS_PDF = True
 except ImportError:

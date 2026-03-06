@@ -9,12 +9,12 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QScrollArea,
     QPushButton, QLabel, QLineEdit, QTabWidget, QMenu, QDialog,
     QFormLayout, QComboBox, QDialogButtonBox, QFileDialog,
-    QMessageBox, QToolButton, QFrame, QSizePolicy
+    QMessageBox, QToolButton
 )
-from PyQt6.QtCore import Qt, pyqtSignal, QSize, QProcess
+from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap, QCursor
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List
 from dataclasses import dataclass
 import json
 import os

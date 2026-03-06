@@ -7,13 +7,12 @@ Phase 2: Index & Suche
 
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton,
-    QListWidget, QListWidgetItem, QLabel, QComboBox, QFrame,
-    QMenu, QToolButton, QProgressBar, QCheckBox, QSplitter
+    QListWidget, QListWidgetItem, QLabel, QComboBox, QMenu,
+    QToolButton, QProgressBar, QCheckBox
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QThread, pyqtSlot
 from PyQt6.QtGui import QAction, QCursor
 from pathlib import Path
-from typing import List, Dict
 from dataclasses import dataclass
 from datetime import datetime
 

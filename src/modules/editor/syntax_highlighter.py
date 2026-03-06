@@ -9,7 +9,6 @@ import re
 from PyQt6.QtGui import (
     QSyntaxHighlighter, QTextCharFormat, QColor, QFont
 )
-from PyQt6.QtCore import Qt
 
 
 class BaseHighlighter(QSyntaxHighlighter):
@@ -64,7 +63,6 @@ class BaseHighlighter(QSyntaxHighlighter):
     
     def _setup_rules(self):
         """Überschreiben für sprachspezifische Regeln"""
-        pass
     
     def highlightBlock(self, text):
         """Wendet Highlighting auf einen Textblock an"""

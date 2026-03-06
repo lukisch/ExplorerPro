@@ -5,8 +5,7 @@ StatusBar - Statusleiste mit Datenschutz-Ampel
 """
 
 from PyQt6.QtWidgets import (
-    QStatusBar, QLabel, QWidget, QHBoxLayout,
-    QFrame
+    QStatusBar, QLabel, QFrame
 )
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QColor

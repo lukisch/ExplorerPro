@@ -6,12 +6,11 @@ Mit vollständiger Menü-Integration
 """
 
 from PyQt6.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QSplitter, QStatusBar, QLabel, QToolBar, QLineEdit,
-    QPushButton, QMessageBox, QMenuBar, QMenu, QToolButton,
-    QDialog, QFormLayout, QCheckBox,
-    QGroupBox, QVBoxLayout as QVBox, QDialogButtonBox,
-    QFileDialog, QInputDialog
+    QMainWindow, QWidget, QVBoxLayout, QSplitter,
+    QLabel, QToolBar, QLineEdit, QPushButton, QMessageBox,
+    QToolButton, QDialog, QFormLayout, QCheckBox, QGroupBox,
+    QVBoxLayout as QVBox, QDialogButtonBox, QFileDialog,
+    QInputDialog
 )
 from PyQt6.QtCore import Qt, QSize, pyqtSignal, QStandardPaths
 from PyQt6.QtGui import QAction, QKeySequence

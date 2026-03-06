@@ -9,14 +9,10 @@ from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QFormLayout, QLineEdit,
     QPushButton, QComboBox, QDateEdit, QSpinBox, QCheckBox,
     QGroupBox, QTableWidget, QTableWidgetItem, QHeaderView,
-    QLabel, QProgressBar, QSplitter, QWidget, QDialogButtonBox,
-    QAbstractItemView, QMessageBox
+    QLabel, QProgressBar, QDialogButtonBox, QAbstractItemView, QMessageBox
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QDate, QThread, pyqtSlot
-from PyQt6.QtGui import QColor
 from pathlib import Path
-from datetime import datetime, timedelta
-from typing import List, Dict, Optional
 
 
 class AdvancedSearchWorker(QThread):

@@ -14,11 +14,10 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QCursor
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List
 from dataclasses import dataclass, field
 from datetime import datetime
 import json
-import os
 
 
 @dataclass

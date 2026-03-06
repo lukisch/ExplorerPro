@@ -5,25 +5,22 @@ QuickEditorDialog - Schneller Code-Editor
 Basiert auf PythonBox
 """
 
-import os
 import sys
-import subprocess
 from pathlib import Path
 from typing import Optional
 
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QPlainTextEdit,
     QPushButton, QLabel, QSplitter, QTextEdit, QFileDialog,
-    QMessageBox, QStatusBar, QMenu, QToolBar, QComboBox,
-    QLineEdit, QShortcut
+    QMessageBox, QShortcut
 )
-from PyQt6.QtCore import Qt, QProcess, pyqtSignal, QTimer
+from PyQt6.QtCore import Qt, QProcess, pyqtSignal
 from PyQt6.QtGui import (
-    QFont, QTextCursor, QKeySequence, QAction,
-    QTextOption, QPainter, QColor
+    QFont, QTextCursor, QKeySequence, QTextOption,
+    QPainter, QColor
 )
 
-from .syntax_highlighter import get_lexer_for_extension, PythonHighlighter
+from .syntax_highlighter import get_lexer_for_extension
 
 
 class LineNumberArea(QPlainTextEdit):

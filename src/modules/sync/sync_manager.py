@@ -9,20 +9,18 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QListWidget, QListWidgetItem,
     QPushButton, QLabel, QLineEdit, QDialog, QFormLayout, QComboBox,
     QDialogButtonBox, QFileDialog, QMessageBox, QToolButton, QProgressBar,
-    QGroupBox, QCheckBox, QTableWidget, QTableWidgetItem, QHeaderView,
-    QAbstractItemView
+    QCheckBox, QTableWidget, QTableWidgetItem, QHeaderView
 )
-from PyQt6.QtCore import Qt, pyqtSignal, QThread, pyqtSlot, QTimer
+from PyQt6.QtCore import Qt, pyqtSignal, QThread, pyqtSlot
 from PyQt6.QtGui import QCursor
 from pathlib import Path
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 import json
 import os
 import shutil
-import hashlib
 
 
 class SyncDirection(Enum):

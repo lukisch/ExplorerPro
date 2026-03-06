@@ -6,8 +6,8 @@ PreviewPanel - Vorschau-Panel für Dateien
 
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QStackedWidget,
-    QLabel, QTextEdit, QScrollArea, QGroupBox, QFormLayout,
-    QLineEdit, QPlainTextEdit, QFrame
+    QLabel, QScrollArea, QGroupBox, QFormLayout, QLineEdit,
+    QPlainTextEdit, QFrame
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap, QImage, QFont, QSyntaxHighlighter, QTextCharFormat, QColor
@@ -22,7 +22,6 @@ except ImportError:
     HAS_FITZ = False
 
 try:
-    from PIL import Image
     HAS_PIL = True
 except ImportError:
     HAS_PIL = False

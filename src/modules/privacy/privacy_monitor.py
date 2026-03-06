@@ -15,7 +15,7 @@ from typing import List, Dict, Set, Optional
 from dataclasses import dataclass
 from enum import Enum
 
-from PyQt6.QtCore import QObject, pyqtSignal, QTimer
+from PyQt6.QtCore import QObject, pyqtSignal
 from PyQt6.QtWidgets import QApplication
 
 logging.basicConfig(level=logging.INFO)

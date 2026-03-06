@@ -6,7 +6,7 @@ Ermöglicht lose Kopplung zwischen Komponenten
 """
 
 from PyQt6.QtCore import QObject, pyqtSignal
-from typing import Dict, List, Callable, Any
+from typing import Dict, List, Callable
 
 
 class EventBus(QObject):

@@ -7,14 +7,14 @@ Phase 2: Index & Suche
 
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QTreeWidget, QTreeWidgetItem,
-    QPushButton, QLabel, QProgressBar, QGroupBox, QCheckBox,
-    QSpinBox, QComboBox, QFileDialog, QMessageBox, QHeaderView,
-    QDialogButtonBox, QMenu, QAbstractItemView
+    QPushButton, QLabel, QProgressBar, QGroupBox, QSpinBox,
+    QComboBox, QFileDialog, QMessageBox, QHeaderView, QDialogButtonBox,
+    QMenu, QAbstractItemView
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QThread, pyqtSlot
 from PyQt6.QtGui import QAction, QCursor
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict
 from collections import defaultdict
 import os
 import hashlib
