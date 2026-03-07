@@ -1,0 +1,118 @@
+{
+  "0 Dateien": {
+    "de": "0 Dateien",
+    "en": "0 Files"
+  },
+  "Abbrechen": {
+    "de": "Abbrechen",
+    "en": "Cancel"
+  },
+  "Alle auswählen": {
+    "de": "Alle auswählen",
+    "en": "Select All"
+  },
+  "Ansicht": {
+    "de": "Ansicht",
+    "en": "View"
+  },
+  "Bild konnte nicht geladen werden": {
+    "de": "Bild konnte nicht geladen werden",
+    "en": "Image could not be loaded"
+  },
+  "Datenschutz-Einstellungen": {
+    "de": "Datenschutz-Einstellungen",
+    "en": "Privacy Settings"
+  },
+  "Keine Datei ausgewählt": {
+    "de": "Keine Datei ausgewählt",
+    "en": "No File Selected"
+  },
+  "Löschen": {
+    "de": "Löschen",
+    "en": "Delete"
+  },
+  "Min. Größe:": {
+    "de": "Min. Größe:",
+    "en": "Min. Size:"
+  },
+  "Neue Datei": {
+    "de": "Neue Datei",
+    "en": "New File"
+  },
+  "Ordner öffnen": {
+    "de": "Ordner öffnen",
+    "en": "Open Folder"
+  },
+  "Prompt auswählen...": {
+    "de": "Prompt auswählen...",
+    "en": "Select Prompt..."
+  },
+  "PyMuPDF nicht installiert.\\nPDF-Vorschau nicht verfügbar.": {
+    "de": "PyMuPDF nicht installiert.\\nPDF-Vorschau nicht verfügbar.",
+    "en": "PyMuPDF not installed.\\nPDF preview not available."
+  },
+  "Scan läuft...": {
+    "de": "Scan läuft...",
+    "en": "Scanning..."
+  },
+  "Schließen": {
+    "de": "Schließen",
+    "en": "Close"
+  },
+  "Suche läuft...": {
+    "de": "Suche läuft...",
+    "en": "Searching..."
+  },
+  "Vorschau nicht verfügbar\\nfür diesen Dateityp": {
+    "de": "Vorschau nicht verfügbar\\nfür diesen Dateityp",
+    "en": "Preview not available\\nfor this file type"
+  },
+  "Zurücksetzen": {
+    "de": "Zurücksetzen",
+    "en": "Reset"
+  },
+  "Älteste behalten": {
+    "de": "Älteste behalten",
+    "en": "Keep Oldest"
+  },
+  "Öffnen": {
+    "de": "Öffnen",
+    "en": "Open"
+  },
+  "▶ Ausführen": {
+    "de": "▶ Ausführen",
+    "en": "▶ Execute"
+  },
+  "⚠️ Kein Index verfügbar": {
+    "de": "⚠️ Kein Index verfügbar",
+    "en": "⚠️ No Index Available"
+  },
+  "✏️ Bearbeiten": {
+    "de": "✏️ Bearbeiten",
+    "en": "✏️ Edit"
+  },
+  "💡 Tipp: Verwende {{name}} für Variablen, die beim Einfügen abgefragt werden": {
+    "de": "💡 Tipp: Verwende {{name}} für Variablen, die beim Einfügen abgefragt werden",
+    "en": "💡 Tip: Use {{name}} for variables that will be prompted when inserting"
+  },
+  "💾 Speichern": {
+    "de": "💾 Speichern",
+    "en": "💾 Save"
+  },
+  "📁 Ordner wählen...": {
+    "de": "📁 Ordner wählen...",
+    "en": "📁 Select Folder..."
+  },
+  "🔄 Sync starten": {
+    "de": "🔄 Sync starten",
+    "en": "🔄 Start Sync"
+  },
+  "🔍 Scan starten": {
+    "de": "🔍 Scan starten",
+    "en": "🔍 Start Scan"
+  },
+  "🗑️ Ausgewählte löschen": {
+    "de": "🗑️ Ausgewählte löschen",
+    "en": "🗑️ Delete Selected"
+  }
+}

@@ -83,3 +83,30 @@ Dieses Projekt verwendet PyQt6 (GPL) und PyMuPDF (AGPL).
 **Version:** 1.0.0
 **Autor:** Lukas Geiger
 **Letzte Aktualisierung:** Maerz 2026
+
+---
+
+## English
+
+An advanced file explorer with preview, duplicate finder, privacy monitor, and integrated editor.
+
+### Features
+
+- Multi-tab file browsing
+- File preview (images, text, PDF)
+- Duplicate finder
+- Privacy monitor
+- Integrated text editor
+
+### Installation
+
+```bash
+git clone https://github.com/lukisch/REL-PUB_ExplorerPro_SUITE.git
+cd REL-PUB_ExplorerPro_SUITE
+pip install -r requirements.txt
+python "src/main.py"
+```
+
+### License
+
+See [LICENSE](LICENSE) for details.
