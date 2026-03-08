@@ -1,7 +1,7 @@
 import sys
 import os
-sys.path.insert(0, r'C:\Users\User\OneDrive\Software Entwicklung\SUITEN\ExplorerPro\src')
-os.chdir(r'C:\Users\User\OneDrive\Software Entwicklung\SUITEN\ExplorerPro\src')
+sys.path.insert(0, r'C:\Users\User\OneDrive\.SOFTWARE\SUITEN\ExplorerPro\src')
+os.chdir(r'C:\Users\User\OneDrive\.SOFTWARE\SUITEN\ExplorerPro\src')
 
 print("Test 1: Sidebar Import...")
 try:

@@ -88,15 +88,26 @@ This project uses PyQt6 (GPL) and PyMuPDF (AGPL).
 
 ## English
 
-An advanced file explorer with preview, duplicate finder, privacy monitor, and integrated editor.
+### ExplorerPro Suite
+
+An advanced file explorer with privacy monitor, preview panel, sync manager, and integrated code editor. Designed as a power-user replacement for standard OS file explorers.
 
 ### Features
 
-- Multi-tab file browsing
-- File preview (images, text, PDF)
-- Duplicate finder
-- Privacy monitor
-- Integrated text editor
+- **File Browser:** Multi-tab browsing with breadcrumb navigation and context menus
+- **Preview Panel:** In-app preview for PDF, images, code (syntax-highlighted), and text files
+- **Privacy Monitor:** Automatic detection and management of sensitive/private files
+- **Advanced Search:** Filter by type, size, and date
+- **Duplicate Finder:** Hash-based duplicate detection across folders
+- **Quick Editor:** Built-in code editor with syntax highlighting (QScintilla + Pygments)
+- **Sync Manager:** Folder synchronization with pattern-based exclusions
+- **App Launcher:** Quick access to configured applications
+- **Prompt Launcher:** Integrated AI prompt management
+
+### Requirements
+
+- Python 3.8+
+- PyQt6, PyQt6-QScintilla, PyMuPDF, watchdog, Pygments
 
 ### Installation
 
@@ -104,9 +115,9 @@ An advanced file explorer with preview, duplicate finder, privacy monitor, and i
 git clone https://github.com/lukisch/REL-PUB_ExplorerPro_SUITE.git
 cd REL-PUB_ExplorerPro_SUITE
 pip install -r requirements.txt
-python "src/main.py"
+python src/main.py
 ```
 
 ### License
 
-See [LICENSE](LICENSE) for details.
+AGPL v3 — See [LICENSE](LICENSE) for details.
