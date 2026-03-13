@@ -236,29 +236,31 @@ class FileIndex:
             category = self.get_category(filename)
             
             conn = sqlite3.connect(self.db_path)
-            cursor = conn.cursor()
-            
-            cursor.execute('''
-                INSERT OR REPLACE INTO files 
-                (path, filename, extension, size, modified, created, hash, category, text_content, indexed_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (
-                filepath,
-                filename,
-                ext,
-                stat.st_size,
-                datetime.fromtimestamp(stat.st_mtime),
-                datetime.fromtimestamp(stat.st_ctime),
-                file_hash,
-                category,
-                text_content,
-                datetime.now()
-            ))
-            
-            conn.commit()
-            conn.close()
+            try:
+                cursor = conn.cursor()
+
+                cursor.execute('''
+                    INSERT OR REPLACE INTO files
+                    (path, filename, extension, size, modified, created, hash, category, text_content, indexed_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    filepath,
+                    filename,
+                    ext,
+                    stat.st_size,
+                    datetime.fromtimestamp(stat.st_mtime),
+                    datetime.fromtimestamp(stat.st_ctime),
+                    file_hash,
+                    category,
+                    text_content,
+                    datetime.now()
+                ))
+
+                conn.commit()
+            finally:
+                conn.close()
             return True
-            
+
         except Exception as e:
             print(f"Indizierung fehlgeschlagen für {filepath}: {e}")
             return False
@@ -318,7 +320,7 @@ class FileIndex:
             sql += ' AND f.size <= ?'
             params.append(max_size)
         
-        sql += ' ORDER BY score LIMIT ?'
+        sql += ' ORDER BY rank LIMIT ?'
         params.append(limit)
         
         try:
@@ -336,8 +338,8 @@ class FileIndex:
         except sqlite3.OperationalError:
             # Falls FTS-Query ungültig, Fallback auf LIKE
             results = self._search_fallback(query, extension, category, min_size, max_size, limit)
-        
-        conn.close()
+        finally:
+            conn.close()
         return results
     
     def _search_fallback(self, query: str, extension: str = None, category: str = None,
@@ -345,37 +347,39 @@ class FileIndex:
         """Fallback-Suche mit LIKE wenn FTS fehlschlägt"""
         conn = sqlite3.connect(self.db_path)
         conn.row_factory = sqlite3.Row
-        cursor = conn.cursor()
-        
-        sql = '''
-            SELECT * FROM files
-            WHERE (filename LIKE ? OR text_content LIKE ?)
-        '''
-        like_pattern = f'%{query}%'
-        params = [like_pattern, like_pattern]
-        
-        if extension:
-            sql += ' AND extension = ?'
-            params.append(extension if extension.startswith('.') else f'.{extension}')
-        
-        if category:
-            sql += ' AND category = ?'
-            params.append(category)
-        
-        if min_size:
-            sql += ' AND size >= ?'
-            params.append(min_size)
-        
-        if max_size:
-            sql += ' AND size <= ?'
-            params.append(max_size)
-        
-        sql += ' ORDER BY modified DESC LIMIT ?'
-        params.append(limit)
-        
-        cursor.execute(sql, params)
-        results = [dict(row) for row in cursor.fetchall()]
-        conn.close()
+        try:
+            cursor = conn.cursor()
+
+            sql = '''
+                SELECT * FROM files
+                WHERE (filename LIKE ? OR text_content LIKE ?)
+            '''
+            like_pattern = f'%{query}%'
+            params = [like_pattern, like_pattern]
+
+            if extension:
+                sql += ' AND extension = ?'
+                params.append(extension if extension.startswith('.') else f'.{extension}')
+
+            if category:
+                sql += ' AND category = ?'
+                params.append(category)
+
+            if min_size is not None:
+                sql += ' AND size >= ?'
+                params.append(min_size)
+
+            if max_size is not None:
+                sql += ' AND size <= ?'
+                params.append(max_size)
+
+            sql += ' ORDER BY modified DESC LIMIT ?'
+            params.append(limit)
+
+            cursor.execute(sql, params)
+            results = [dict(row) for row in cursor.fetchall()]
+        finally:
+            conn.close()
         return results
     
     def advanced_search(self, query: str = None, extensions: List[str] = None,
@@ -390,118 +394,122 @@ class FileIndex:
         """
         conn = sqlite3.connect(self.db_path)
         conn.row_factory = sqlite3.Row
-        cursor = conn.cursor()
-        
-        sql = 'SELECT DISTINCT f.* FROM files f'
-        params = []
-        conditions = []
-        
-        # Tags-Join wenn nötig
-        if tags:
-            sql += '''
-                JOIN file_tags ft ON f.id = ft.file_id
-                JOIN tags t ON ft.tag_id = t.id
-            '''
-            placeholders = ','.join(['?' for _ in tags])
-            conditions.append(f't.name IN ({placeholders})')
-            params.extend(tags)
-        
-        # Query-Bedingung
-        if query:
-            query_conditions = []
-            pattern = f'%{query}%'
-            
-            if search_name:
-                query_conditions.append('LOWER(f.filename) LIKE LOWER(?)')
-                params.append(pattern)
-            
-            if search_content:
-                query_conditions.append('LOWER(f.text_content) LIKE LOWER(?)')
-                params.append(pattern)
-            
-            if search_path:
-                query_conditions.append('LOWER(f.path) LIKE LOWER(?)')
-                params.append(pattern)
-            
-            if query_conditions:
-                conditions.append(f'({" OR ".join(query_conditions)})')
-        
-        # Extensions
-        if extensions:
-            normalized_ext = [e if e.startswith('.') else f'.{e}' for e in extensions]
-            placeholders = ','.join(['?' for _ in normalized_ext])
-            conditions.append(f'f.extension IN ({placeholders})')
-            params.extend(normalized_ext)
-        
-        # Datum
-        if date_from:
-            conditions.append('f.modified >= ?')
-            params.append(str(date_from))
-        
-        if date_to:
-            conditions.append('f.modified <= ?')
-            params.append(str(date_to))
-        
-        # Größe
-        if min_size is not None:
-            conditions.append('f.size >= ?')
-            params.append(min_size)
-        
-        if max_size is not None:
-            conditions.append('f.size <= ?')
-            params.append(max_size)
-        
-        # WHERE zusammenbauen
-        if conditions:
-            sql += ' WHERE ' + ' AND '.join(conditions)
-        
-        sql += ' ORDER BY f.modified DESC LIMIT ?'
-        params.append(limit)
-        
-        cursor.execute(sql, params)
-        results = [dict(row) for row in cursor.fetchall()]
-        conn.close()
+        try:
+            cursor = conn.cursor()
+
+            sql = 'SELECT DISTINCT f.* FROM files f'
+            params = []
+            conditions = []
+
+            # Tags-Join wenn nötig
+            if tags:
+                sql += '''
+                    JOIN file_tags ft ON f.id = ft.file_id
+                    JOIN tags t ON ft.tag_id = t.id
+                '''
+                placeholders = ','.join(['?' for _ in tags])
+                conditions.append(f't.name IN ({placeholders})')
+                params.extend(tags)
+
+            # Query-Bedingung
+            if query:
+                query_conditions = []
+                pattern = f'%{query}%'
+
+                if search_name:
+                    query_conditions.append('LOWER(f.filename) LIKE LOWER(?)')
+                    params.append(pattern)
+
+                if search_content:
+                    query_conditions.append('LOWER(f.text_content) LIKE LOWER(?)')
+                    params.append(pattern)
+
+                if search_path:
+                    query_conditions.append('LOWER(f.path) LIKE LOWER(?)')
+                    params.append(pattern)
+
+                if query_conditions:
+                    conditions.append(f'({" OR ".join(query_conditions)})')
+
+            # Extensions
+            if extensions:
+                normalized_ext = [e if e.startswith('.') else f'.{e}' for e in extensions]
+                placeholders = ','.join(['?' for _ in normalized_ext])
+                conditions.append(f'f.extension IN ({placeholders})')
+                params.extend(normalized_ext)
+
+            # Datum
+            if date_from:
+                conditions.append('f.modified >= ?')
+                params.append(str(date_from))
+
+            if date_to:
+                conditions.append('f.modified <= ?')
+                params.append(str(date_to))
+
+            # Größe
+            if min_size is not None:
+                conditions.append('f.size >= ?')
+                params.append(min_size)
+
+            if max_size is not None:
+                conditions.append('f.size <= ?')
+                params.append(max_size)
+
+            # WHERE zusammenbauen
+            if conditions:
+                sql += ' WHERE ' + ' AND '.join(conditions)
+
+            sql += ' ORDER BY f.modified DESC LIMIT ?'
+            params.append(limit)
+
+            cursor.execute(sql, params)
+            results = [dict(row) for row in cursor.fetchall()]
+        finally:
+            conn.close()
         return results
     
     def find_duplicates(self) -> List[Tuple[str, List[str]]]:
         """Findet Duplikate basierend auf Hash"""
         conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
-        
-        cursor.execute('''
-            SELECT hash, GROUP_CONCAT(path, '|||') as paths
-            FROM files
-            WHERE hash IS NOT NULL
-            GROUP BY hash
-            HAVING COUNT(*) > 1
-        ''')
-        
-        results = []
-        for row in cursor.fetchall():
-            hash_val, paths_str = row
-            paths = paths_str.split('|||')
-            results.append((hash_val, paths))
-        
-        conn.close()
+        try:
+            cursor = conn.cursor()
+
+            cursor.execute('''
+                SELECT hash, GROUP_CONCAT(path, '|||') as paths
+                FROM files
+                WHERE hash IS NOT NULL
+                GROUP BY hash
+                HAVING COUNT(*) > 1
+            ''')
+
+            results = []
+            for row in cursor.fetchall():
+                hash_val, paths_str = row
+                paths = paths_str.split('|||')
+                results.append((hash_val, paths))
+        finally:
+            conn.close()
         return results
     
     def get_stats(self) -> Dict:
         """Gibt Statistiken zum Index zurück"""
         conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
-        
-        stats = {}
-        
-        cursor.execute('SELECT COUNT(*) FROM files')
-        stats['total_files'] = cursor.fetchone()[0]
-        
-        cursor.execute('SELECT SUM(size) FROM files')
-        stats['total_size'] = cursor.fetchone()[0] or 0
-        
-        cursor.execute('SELECT category, COUNT(*) FROM files GROUP BY category')
-        stats['by_category'] = dict(cursor.fetchall())
-        
-        conn.close()
+        try:
+            cursor = conn.cursor()
+
+            stats = {}
+
+            cursor.execute('SELECT COUNT(*) FROM files')
+            stats['total_files'] = cursor.fetchone()[0]
+
+            cursor.execute('SELECT SUM(size) FROM files')
+            stats['total_size'] = cursor.fetchone()[0] or 0
+
+            cursor.execute('SELECT category, COUNT(*) FROM files GROUP BY category')
+            stats['by_category'] = dict(cursor.fetchall())
+        finally:
+            conn.close()
         return stats
 
 

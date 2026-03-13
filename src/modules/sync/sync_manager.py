@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QListWidget, QListWidgetItem,
     QPushButton, QLabel, QLineEdit, QDialog, QFormLayout, QComboBox,
     QDialogButtonBox, QFileDialog, QMessageBox, QToolButton, QProgressBar,
-    QCheckBox, QTableWidget, QTableWidgetItem, QHeaderView
+    QCheckBox, QTableWidget, QTableWidgetItem, QHeaderView, QMenu
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QThread, pyqtSlot
 from PyQt6.QtGui import QCursor

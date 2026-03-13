@@ -485,6 +485,15 @@ class MainWindow(QMainWindow):
         else:
             self.statusBar().showMessage("Keine Datei ausgewählt", 3000)
     
+    def show_apps_panel(self):
+        pass  # TODO: implement - switch sidebar to apps panel
+
+    def show_prompts_panel(self):
+        pass  # TODO: implement - switch sidebar to prompts panel
+
+    def show_sync_panel(self):
+        pass  # TODO: implement - switch sidebar to sync panel
+
     def _show_privacy_settings(self):
         """Zeigt Datenschutz-Einstellungen"""
         if hasattr(self, 'privacy_monitor'):

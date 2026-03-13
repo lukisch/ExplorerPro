@@ -314,30 +314,30 @@ class PrivacyMonitor(QObject):
         
         detected = []
         anonymized = text
-        
-        # Whitelist-Check
+        has_high = False
+
+        # Whitelist-Check: Whitelisted-Begriffe aus den Ergebnissen herausfiltern
         text_lower = text.lower()
-        for white_term in self.whitelist:
-            if white_term.lower() in text_lower:
-                # Whitelisted → als sicher markieren
-                pass
-        
+        whitelisted_terms = {t.lower() for t in self.whitelist if t.lower() in text_lower}
+
         # Pattern-Check
         for pattern, severity, name in self.compiled_patterns:
             matches = pattern.findall(text)
             if matches:
+                # Treffer überspringen, wenn der Pattern-Name einem Whitelist-Begriff entspricht
+                if name.lower() in whitelisted_terms:
+                    continue
                 detected.append(f"{name}: {len(matches)}x")
                 anonymized = pattern.sub("[***]", anonymized)
-        
+                if severity == "high":
+                    has_high = True
+
         # Status bestimmen
         if not detected:
             status = PrivacyStatus.GREEN
             message = "Keine sensiblen Daten erkannt"
         else:
             # Prüfe Severity
-            has_high = any(sev == "high" for _, sev, _ in self.compiled_patterns 
-                          if any(pat.search(text) for pat, s, n in [(_, sev, _)] 
-                                if s == "high"))
             
             if has_high or len(detected) > 2:
                 status = PrivacyStatus.RED
