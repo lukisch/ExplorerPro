@@ -22,6 +22,7 @@ except ImportError:
     HAS_FITZ = False
 
 try:
+    from PIL import Image
     HAS_PIL = True
 except ImportError:
     HAS_PIL = False
@@ -255,7 +256,7 @@ class MetadataPanel(QWidget):
         ext = os.path.splitext(name)[1].lower()
         
         self.name_label.setText(name)
-        self.type_label.setText(ext or "Ordner" if os.path.isdir(path) else "Unbekannt")
+        self.type_label.setText("Ordner" if os.path.isdir(path) else (ext or "Unbekannt"))
         
         # Größe formatieren
         size = stat.st_size

@@ -12,12 +12,12 @@ from typing import Optional
 from PySide6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QPlainTextEdit,
     QPushButton, QLabel, QSplitter, QTextEdit, QFileDialog,
-    QMessageBox, QShortcut
+    QMessageBox, QWidget
 )
-from PySide6.QtCore import Qt, QProcess, Signal
+from PySide6.QtCore import Qt, QProcess, Signal, QSize
 from PySide6.QtGui import (
     QFont, QTextCursor, QKeySequence, QTextOption,
-    QPainter, QColor
+    QPainter, QColor, QTextFormat, QShortcut
 )
 
 from .syntax_highlighter import get_lexer_for_extension
@@ -122,9 +122,6 @@ class LineNumberArea(QPlainTextEdit):
             block_number += 1
 
 
-# Importiere QTextFormat für FullWidthSelection
-from PySide6.QtGui import QTextFormat
-
 
 class LineNumberWidget(QWidget):
     """Widget für Zeilennummern"""
@@ -139,9 +136,6 @@ class LineNumberWidget(QWidget):
     def paintEvent(self, event):
         self.editor.line_number_area_paint_event(event)
 
-
-from PySide6.QtWidgets import QWidget
-from PySide6.QtCore import QSize
 
 
 class CodeEditor(QPlainTextEdit):
