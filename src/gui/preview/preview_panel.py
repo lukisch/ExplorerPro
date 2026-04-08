@@ -348,8 +348,12 @@ class PreviewPanel(QWidget):
             self.preview_stack.setCurrentIndex(1)
         
         # Text/Code-Vorschau
-        elif ext in ['.txt', '.md', '.py', '.js', '.html', '.css', '.json', 
-                     '.xml', '.sql', '.c', '.cpp', '.h', '.java', '.ini', '.cfg']:
+        elif ext in ['.txt', '.md', '.py', '.js', '.html', '.css', '.json',
+                     '.xml', '.sql', '.c', '.cpp', '.h', '.java', '.ini', '.cfg',
+                     '.log', '.yml', '.yaml', '.toml', '.sh', '.bat', '.ps1',
+                     '.csv', '.tsv', '.env', '.gitignore', '.editorconfig',
+                     '.rs', '.go', '.ts', '.tsx', '.jsx', '.vue', '.svelte',
+                     '.r', '.rb', '.php', '.lua', '.tex', '.bib', '.cmake']:
             self.text_preview.load_file(path)
             self.preview_stack.setCurrentIndex(2)
         
