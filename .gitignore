@@ -22,6 +22,7 @@ env/
 
 # ---- BACH Interne Steuerungsdateien (NIEMALS in Git!) ----
 AUFGABEN.txt
+AUFGABEN.txt.txt
 TEST.txt
 TESTS.txt
 TESTERGEBNISSE.txt

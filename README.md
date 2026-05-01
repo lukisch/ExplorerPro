@@ -61,6 +61,15 @@ Or via the batch file:
 START_ExplorerPro.bat
 ```
 
+## Tests
+
+Der aktuelle lokale Smoke-Check deckt Import- und Bootstrap-Pfade über
+`test_imports.py`, `test_app.py` und `tests/` ab.
+
+## Screenshot
+
+![ExplorerPro Main Window](README/screenshots/main.png)
+
 ## Dependencies
 
 | Package | Purpose |
